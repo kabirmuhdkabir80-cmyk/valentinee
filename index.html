@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Iman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital@1&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #fdf5f6;
+            --accent-red: #a33b4e;
+            --text-color: #5a3d42;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff5f6 0%, #fae1e4 100%);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            text-align: center;
+            position: fixed; /* Prevents bouncing on mobile */
+        }
+
+        .container {
+            width: 85%;
+            max-width: 400px;
+            z-index: 10;
+        }
+
+        .card {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        .card.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--accent-red);
+            margin: 0 0 20px 0;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(163, 59, 78, 0.2);
+            touch-action: manipulation;
+        }
+
+        .reason-box {
+            background: rgba(255, 255, 255, 0.7);
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 15px;
+            width: 100%;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        #maybeBtn {
+            background-color: #e2cad0;
+            color: var(--text-color);
+            transition: transform 0.1s ease;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            top: -10px;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div class="card active" id="page1">
+            <h1>Iman...</h1>
+            <button onclick="playMusicAndNext(2)">Continue ❤️</button>
+        </div>
+
+        <div class="card" id="page2">
+            <p>There's something I've been wanting to ask you.</p>
+            <p>It's been on my heart for a while...</p>
+            <h2>Are you ready?</h2>
+            <button onclick="nextPage(3)">I'm ready 💕</button>
+        </div>
+
+        <div class="card" id="page3">
+            <small style="letter-spacing: 2px;">A LITTLE STORY</small>
+            <h2>How It All Began</h2>
+            <p>I never expected to find someone like you. Suddenly everything felt brighter, warmer, and more meaningful.</p>
+            <p>I can't imagine my life without you now.</p>
+            <button onclick="nextPage(4)">Keep reading 💕</button>
+        </div>
+
+        <div class="card" id="page4">
+            <small style="letter-spacing: 2px;">FROM MY HEART</small>
+            <h2>What Makes You Special</h2>
+            <div class="reason-box">✨ Your smile that lights up every room</div>
+            <div class="reason-box">💫 The way you make me feel understood</div>
+            <div class="reason-box">🌸 Your kindness and gentle heart</div>
+            <div class="reason-box">💖 The way you're unapologetically you</div>
+            <button onclick="nextPage(5)" style="margin-top:20px;">Continue 💕</button>
+        </div>
+
+        <div class="card" id="page5">
+            <h1>Iman,</h1>
+            <h2>will you be my Valentine?</h2>
+            <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; align-items: center;">
+                <button onclick="nextPage(6)" style="width: 200px;">YES ❤️</button>
+                <button id="maybeBtn" 
+                        ontouchstart="moveButton(this)" 
+                        onmouseover="moveButton(this)" 
+                        style="width: 150px;">
+                    Hmm... 🤨
+                </button>
+            </div>
+        </div>
+
+        <div class="card" id="page6">
+            <h1>❤️</h1>
+            <h2>You just made my heart smile.</h2>
+            <p>I can't wait to celebrate you.</p>
+            <div style="width: 50px; height: 1px; background: #a33b4e; margin: 15px 0;"></div>
+            <p><strong>With all my heart,</strong></p>
+            <p style="font-family: 'Dancing Script'; font-size: 1.8rem; color: var(--accent-red); margin: 0;">Your [Name]</p>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+
+        function playMusicAndNext(page) {
+            music.play().catch(e => console.log("Audio play deferred"));
+            nextPage(page);
+        }
+
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+            document.getElementById('page' + pageNumber).classList.add('active');
+            
+            if(pageNumber === 6) {
+                startConfetti();
+            }
+        }
+
+        function moveButton(btn) {
+            // Limits movement so the button doesn't go off-screen
+            const maxX = window.innerWidth - btn.offsetWidth - 20;
+            const maxY = window.innerHeight - btn.offsetHeight - 20;
+            
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            
+            btn.style.position = 'fixed';
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+            btn.style.zIndex = '999';
+        }
+
+        function startConfetti() {
+            for(let i=0; i<60; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = ['#a33b4e', '#ffffff', '#ffccd5'][Math.floor(Math.random()*3)];
+                confetti.style.borderRadius = '50%';
+                document.body.appendChild(confetti);
+                
+                const duration = Math.random() * 3000 + 2000;
+                confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: duration,
+                    easing: 'linear'
+                });
+                
+                setTimeout(() => confetti.remove(), duration);
+            }
+        }
+    </script>
+</body>
+</html>
